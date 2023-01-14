@@ -16,7 +16,7 @@ include_once "./inc/navbar.php";
 
         <?php
 
-        $products = [
+       /*  $products = [
             [
                 'name' => 'Mike Running Shoes',
                 'description' => 'Very nice product',
@@ -38,7 +38,10 @@ include_once "./inc/navbar.php";
                 'image' => 'https://cdn.pixabay.com/photo/2016/08/31/22/20/weights-1634747__340.jpg',
                 'rating' => 5,
             ],
-        ];
+        ]; */
+        $db_conn=mysqli_connect('localhost','root','','catalog');
+        $sql= "SELECT * FROM products";
+        $result = mysqli_query($db_conn,$sql );
 
         $recommended = ['Tennis Edge', 'Weight It'];
 
@@ -47,8 +50,9 @@ include_once "./inc/navbar.php";
             return in_array($name, $recommended) ? "bi-star-fill" : "bi-star";
         };
 
-        // $len = count($products);
-        foreach ($products as $item) {
+       if ($result&&mysqli_num_rows($result)>0){
+
+         while ( $item=mysqli_fetch_assoc($result)) {
             $col = <<<COL
                 <div class="col-sm-12 col-md-4 mb-3">
                     <div class="card">
@@ -67,6 +71,9 @@ include_once "./inc/navbar.php";
 
             echo $col;
         }
+
+       }
+      
         ?>
     </div>
 
