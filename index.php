@@ -1,4 +1,6 @@
 <?php
+
+require_once "./inc/config.php";
 require_once "./inc/utils.php";
 include_once "./inc/header.php";
 include_once "./inc/navbar.php";
@@ -39,7 +41,7 @@ include_once "./inc/navbar.php";
                 'rating' => 5,
             ],
         ]; */
-        $db_conn=mysqli_connect('localhost','root','','catalog');
+        $db_conn=mysqli_connect(DB_URL,DB_USER,"",DB_NAME);
         $sql= "SELECT * FROM products";
         $result = mysqli_query($db_conn,$sql );
 
